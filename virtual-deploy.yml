@@ -26,11 +26,6 @@ spec:
           valueFrom: {fieldRef: {fieldPath: metadata.name}}
         - name: OKIND
           value: virtual
-        - name: license
-          value: x6042288djl44-x7bqoauer5t57n-x125e8gp45jugl
-        - name: whatap.server.host
-          value: 3.39.176.158
-
         resources:
           requests:
             cpu: "50m"
