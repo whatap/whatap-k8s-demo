@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whatap-virtual-deployment
+  namespace: virtual
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: virtual-agent-server-test
+  template:
+    metadata:
+      name: virtual-agent-server-pod
+      labels:
+        app: virtual-agent-server-test
+    spec:
+      containers:
+      - image:  whatap/virtual
+        name: virtual
+        env:
+        - name: NODE_IP
+          valueFrom: {fieldRef: {fieldPath: status.hostIP}}
+        - name: NODE_NAME
+          valueFrom: {fieldRef: {fieldPath: spec.nodeName}}
+        - name: POD_NAME
+          valueFrom: {fieldRef: {fieldPath: metadata.name}}
+        - name: OKIND
+          value: virtual
+        - name: license
+          value: x6042288djl44-x7bqoauer5t57n-x125e8gp45jugl
+        - name: whatap.server.host
+          value: 3.39.176.158
+
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "128Mi"
+          limits:
+            cpu: "300m"
+            memory: "256Mi"
